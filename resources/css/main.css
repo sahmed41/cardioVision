@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap');
+
+:root {
+    --bg_primary: #e6e1e1;
+    --white: #fff;
+    --dark-blue: #10217d;
+    --light-blue: #63c8f2;
+    --yellow: #f7cc38;
+    --orange: #f37336;
+    --light-orange: #EDBA91;
+    --green: #5ABA4A;
+    --light-green: #94C307;
+    --red: #ff6969;
+
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', sans-serif;
+}
+
+
+button,
+input[type="submit"] {
+    border: none;
+    border-radius: 5px;    
+    cursor: pointer;
+}
+
+/* Navigation */
+.back_button {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 5%;
+    width: 20%;
+    height: 50px;
+    padding: 15px 5px 5px 15px ;
+    background-color: var(--dark-blue);
+    font-size: 1.2em;
+    text-decoration: none;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+}
+
+.logout_button {
+    display: block;
+    position: absolute;
+    width: 20%;
+    height: 50px;    
+    padding: 15px 5px 5px 15px ;
+    background-color: var(--orange);
+    font-size: 1.2em;
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    top: 20px;
+    right: 5%;
+    text-align: center;
+    text-decoration: none;
+}
+
+
+/* Icons */
+
+.icon {
+    width: 150px;
+    height: 150px;
+    /* border: 1px solid black; */
+    padding: 10px 10px 150px 10px;
+    cursor: pointer;
+}
+
+.icon_image {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.icon_text {
+    font-size: 1.2em;
+    color: #fff;
+    text-align: center;
+    margin: 15px auto 0 auto;
+}

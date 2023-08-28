@@ -1,0 +1,51 @@
+@import url(main.css);
+
+
+
+body {
+    background-color: var(--bg_primary);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#login_main {
+    width: 100%;
+}
+
+#hero_image {
+    width: 100%;
+}
+
+#login_form input {
+    display: block;
+    width: 90%;
+    height: 50px;
+    margin: 30px auto;
+}
+
+#login_form input[type="text"],
+#login_form input[type="password"] {
+    background-color: var(--white);
+    padding: 0 10px;
+    font-size: 1.2em;
+    border: none;
+    
+    border-radius: 5px;
+}
+
+#login_form input[type="submit"] {
+    background-color: var(--green);
+    /* outline: none; */
+    font-size: 1.2em;
+    color: var(--white);
+} 
+
+
+#register_message {
+    width: 90%;
+    margin: auto;
+}
