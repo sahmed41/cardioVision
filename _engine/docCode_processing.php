@@ -13,20 +13,9 @@ $result = $conn->query($sql);
 if ($result->num_rows == 1) {
   // output data of each row
     $row = $result->fetch_assoc();
-    echo $row['id'] . " " . $row['patient'] . " " . $row['physician'] . " " . $row['docCode'] . " ";
-  
-    // echo "nic: " . $row["nic"]. ", Password: " . $row["password"];
-    // $_SESSION['id'] = $row['id'] ;
-    // $_SESSION['f_name'] = $row['f_name'];
-    // $_SESSION['l_name'] = $row['l_name'];
-    // $_SESSION['dob'] = $row['dob'];
-    // $_SESSION['email'] = $row['email'];
-    // $_SESSION['phone'] = $row['phone'];
-    // $_SESSION['role'] = $row['role'];
-    // $_SESSION['nm_id'] = $row['nm_id'];
-    // $_SESSION['password'] = $row['password'];
-
-  header("Location: ../index.php?page=patientDiagnoseScreen"); 
+    echo $row['id'] . " " . $row['patient'] . " " . $row['physician'] . " " . $row['docCode'] . " "; 
+    $_SESSION['doc_code'] = $_POST['doc_code'];
+    header("Location: ../index.php?page=patientDiagnoseScreen"); 
   
 } else {
   echo "No such docCode exists <br>";
@@ -34,7 +23,7 @@ if ($result->num_rows == 1) {
 
 }
 
-require_once('db_disconnection.php');
+require_once('db_disconnection.php?docCode='.$doc_code);
 
 
 
