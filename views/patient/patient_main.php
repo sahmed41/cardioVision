@@ -60,8 +60,13 @@
 <script>
     let patient_diagnose_icon = document.getElementById('patient_diagnose_icon');
     patient_diagnose_icon.addEventListener("click", function(){
-        window.location ="index.php?page=patientDiagnoseCode";
+        window.location = "index.php?page=patientDiagnoseCode";
     });
+
+    let my_profile_icon =document.getElementById('my_profile_icon');
+    my_profile_icon.addEventListener("click", function() {
+        window.location = "index.php?page=patientProfile"; 
+    })
 </script>
     
 

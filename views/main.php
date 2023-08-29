@@ -14,6 +14,8 @@ if (isset($_SESSION['role'])) {
             require_once('patient/patient_diagnose_code.php'); // Rout to the page to enter docCode again
         } elseif (isset($_GET['page']) and $_GET['page'] == "patientUploadImage") {
             require_once('patient/patient_upload_image.php'); // Rout to the ecg image upload page
+        } elseif (isset($_GET['page']) and $_GET['page'] == "patientProfile") {
+            require_once('patient/patient_profile.php'); // Rout to patient profile page
         } else {
             require_once('patient/patient_main.php');
 
