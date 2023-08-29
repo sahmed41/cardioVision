@@ -27,11 +27,10 @@
 </div>
 <form action="_engine\ecg_image_processing.php" method="post" enctype="multipart/form-data">
     <input type="file" id="ecg_capture" name="ecg_capture" accept="image/*" capture >
-    <!-- <input type="hidden" id="doc_code" name="doc_code" value=> -->
     <input type="submit" value="Interpret">
 </form>
 
-<!-- <input type="file" id="img" name="img" accept="image/*" id="upload_button"> -->
+
 <?php 
 if (isset($_GET['aiInterpreted']) and $_GET['aiInterpreted'] == 'true') {
     require_once('_engine/db_connection.php'); // Connectiong to database
@@ -75,7 +74,7 @@ if (isset($_GET['aiInterpreted']) and $_GET['aiInterpreted'] == 'true') {
     ecg_capture.addEventListener("change", function(ev) {
         console.log(ecg_capture.files[0]);
         console.log(URL.createObjectURL(ecg_capture.files[0])); 
-        ecg_capture_display.src = URL.createObjectURL(ecg_capture.files[0]);       
+        ecg_capture_display.src = URL.createObjectURL(ecg_capture.files[0]); // Display image
     })
 </script>
 
