@@ -9,7 +9,7 @@
 
     #patient_profile {
         width: 90%;
-        margin: 25px auto;
+        margin: 100px auto 25px auto;
         padding: 5px;
         background-color: var(--white);
         border-radius: 5px;
@@ -38,6 +38,24 @@
 
     .diagnosis .diagnosis_id {
         font-size: 1.2em;
+    }
+
+    .link_to_result {
+        background-color: var(--green);
+        width: 40%;
+        margin: 5px 0;
+        padding: 2px;
+        text-align: center;
+    }
+    
+    .link_to_result a {
+        color: var(--white);                
+        text-decoration: none;
+    }
+
+    .new {
+        color: var(--orange);
+        font-size: 1.1em;
     }
 </style>
 
@@ -81,8 +99,8 @@
         <div class="diagnosis" id="diagnosis">
             <div id="diagnosis_information">
                 <p class="diagnosis_date"><?php echo "00" . $row1['date'] ?></p>
-                <p class="diagnosis_id">Diagnose <?php echo "00" . $row1['id'] ?></p>
-                <!-- <p><a href="index.php?page=patientResult&diagnoseId=<?php echo $row1['id']; ?>">Open</a></p> -->
+                <p class="diagnosis_id">Diagnosis <?php echo "00" . $row1['id'] ?></p>
+                <p class="link_to_result"><a href="index.php?page=patientResult&diagnoseId=<?php echo $row1['id']; ?>">Open</a></p>
             </div>
             
                     
@@ -93,12 +111,10 @@
                         echo '<div class="new_indicator"><p class="new">New</p></div>';
                     } ?>
             <script> // This will enable the feature of clicking anywther in the diagnosis to take you to corresponding result. I have uside inside the body not at the end, beause the diagnose id for each result is generted in this loop. 
-                $(".diagnosis").click(function() {
-                    window.location = "index.php?page=patientResult&diagnoseId=<?php echo $row1['id']; ?>";
-                });
-                
+                              
                 
                 $('.new_indicator').parent().css("border-left","5px solid var(--orange)"); // Giving the orange border to results that are not interpreted yet
+                $('.new_indicator').prev().children(":last-child").css("background-color","var(--orange)"); // Giving the orange border to results that are not interpreted yet
                 
                 
             </script>

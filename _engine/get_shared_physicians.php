@@ -19,8 +19,8 @@ if ($result->num_rows > 0) {
         if($result_user->num_rows == 1 ) {
             $row_user = $result_user->fetch_assoc();
             echo '<div class="second_opinion_physicians">';
-            echo $row_user['id'] . ' - ' . $row_user['f_name'] . " " . $row_user['l_name'];
-            echo "<a href=\"_engine/remove_share_physician.php?secondOpinionId=" . $second_opinion_id . "&diagnoseId=" . $diagnose_id . "\"> Remove</a>"; // Link to removing a physicina from shared list
+            echo $row_user['f_name'] . " " . $row_user['l_name'];
+            echo "<a href=\"_engine/remove_share_physician.php?secondOpinionId=" . $second_opinion_id . "&diagnoseId=" . $diagnose_id . "\" class='second_physician_remove_button'> Remove</a>"; // Link to removing a physicina from shared list
             echo '</div>';   
         }
 

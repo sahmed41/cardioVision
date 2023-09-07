@@ -18,7 +18,7 @@
 
     .icon {
         width: 150px;
-        height: 150px;
+        height: 180px;
         background-color: var(--yellow);
         /* border: 1px solid black; */
         padding: 10px 10px 150px 10px;
@@ -47,6 +47,18 @@
         background-color: var(--light-blue);
     }
     
+    #patient_history_icon {
+        background-color: var(--light-green);
+    }
+    
+    #view_results_icon {
+        background-color: var(--green);
+    }
+    
+    #shared_results_icon {
+        background-color: var(--red);
+    }
+    
 
     
 </style>
@@ -60,16 +72,16 @@
         <p class="icon_text">Diagnose</p>
     </div>
     <div id="patient_history_icon" class="icon">
-        <img src="resources/pictures/stethoscope.png" alt="Image of a stethoscope" class="icon_image">
+        <img src="resources/pictures/patient_history.png" alt="Image of a stethoscope" class="icon_image">
         <p class="icon_text">Patient History</p>
     </div>
     <div id="view_results_icon" class="icon">
-        <img src="resources/pictures/my_profile.png" alt="Image of a stethoscope" class="icon_image">
-        <p class="icon_text">My Profile</p>
+        <img src="resources/pictures/view_results.png" alt="Image of a stethoscope" class="icon_image">
+        <p class="icon_text">View Results</p>
     </div>
     <div id="shared_results_icon" class="icon">
-        <img src="resources/pictures/my_profile.png" alt="Image of a stethoscope" class="icon_image">
-        <p class="icon_text">Shared</p>
+        <img src="resources/pictures/shared_results.png" alt="Image of a stethoscope" class="icon_image">
+        <p class="icon_text">Shared Results</p>
     </div>
 
 </main>

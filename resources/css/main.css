@@ -36,11 +36,12 @@ input[type="submit"] {
     position: absolute;
     top: 20px;
     left: 5%;
-    width: 20%;
+    width: 30%;
     height: 50px;
     padding: 15px 5px 5px 15px ;
     background-color: var(--dark-blue);
     font-size: 1.2em;
+    text-align: center;
     text-decoration: none;
     color: var(--white);
     border: none;
@@ -50,11 +51,12 @@ input[type="submit"] {
 .logout_button {
     display: block;
     position: absolute;
-    width: 20%;
+    width: 30%;
     height: 50px;    
     padding: 15px 5px 5px 15px ;
     background-color: var(--orange);
     font-size: 1.2em;
+    text-align: center;
     color: var(--white);
     border: none;
     border-radius: 5px;

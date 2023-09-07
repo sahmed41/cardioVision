@@ -39,7 +39,8 @@ if ($patient_id_confirm) {
     VALUES ('$physician_id', '$patient_id', '$doc_code', '$date_time')";
 
     if ($conn->query($sql) === TRUE) {
-    echo "The following is the docCode for this consultation session: $doc_code";
+    echo "<p>The following is the docCode for this consultation session:</p>";
+    echo "<p id='doc_code'>$doc_code</p>";
     } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
     }
