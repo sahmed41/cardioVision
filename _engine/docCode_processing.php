@@ -23,12 +23,8 @@ if ($result->num_rows == 1) {
 
 }
 
-require_once('db_disconnection.php?docCode='.$doc_code);
+require_once('db_disconnection.php');
 
 
 
 ?>
-<h1>Hello</h1>
-<h2>We process docCode here</h2>
-<h3><?php echo $_POST['doc_code'] ?></h3>
-<h3><?php echo $_SESSION['id'] ?></h3>

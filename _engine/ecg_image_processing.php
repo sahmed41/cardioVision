@@ -6,8 +6,8 @@ $patient_id = $_SESSION['id'];
 $doc_code =  $_SESSION['doc_code'];
 $doc_code_used = false;
 echo $doc_code;
+$ai_interpretation  = ""; // 0 for normal and 1 for abnormal (Oposite to the model)
 // Make sure that docCod is not used before
-
 $sql_doc_code = "SELECT docCodeUsed FROM consultation WHERE docCode='$doc_code'";
 $result = $conn->query($sql_doc_code);
 
@@ -34,10 +34,10 @@ if (!$doc_code_used) {
   $consultation_date = "";
   
   // Getting consultation ID and Date
-  $sql = "SELECT id, date FROM consultation WHERE patient=$patient_id";
+  $sql = "SELECT id, date FROM consultation WHERE patient='$patient_id' and docCode = '$doc_code'";
   $result = $conn->query($sql);
   
-  if ($result->num_rows == 1) {
+  if ($result->num_rows > 0) {
     // output data of each row
     $row = $result->fetch_assoc();
   
@@ -49,9 +49,9 @@ if (!$doc_code_used) {
     echo "No such docCode exists <br>";
     echo '<a href="../index.php">Go back</a>';
   }
-  
+  echo "Consultation ID: " . $consultation_id;
   // Setup docCode to used
-  $sql = "UPDATE consultation SET docCodeUsed = true WHERE id=$consultation_id";
+  $sql = "UPDATE consultation SET docCodeUsed='1' WHERE id=$consultation_id";
   
   if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
@@ -87,10 +87,42 @@ if (!$doc_code_used) {
   // Uploading the photo
   move_uploaded_file($_FILES["ecg_capture"]["tmp_name"], $target_file);
   
+  // Getting AI interpretation
+  $url = 'http://127.0.0.1:8000/ecgInterpret';
+  $data = ['name' => $ecg_image];
+
+  $options = [
+      'http' => [
+          'header' => "Content-type: application/json\r\n",
+          'method' => 'POST',
+          'content' => json_encode($data),
+      ],
+  ];
+
+  $context = stream_context_create($options);
+  $result = file_get_contents($url, false, $context);
+
+  if ($result === false) {
+      echo "An error have occured";
+  }
+  
+  $data = json_decode($result, true);
+
+  $class = $data['className'];
+  if ($class == "Normal") {
+    $ai_interpretation = 0;
+  } else {
+    $ai_interpretation = 1;
+  }
+
+  echo $class;
+  echo "<br>";
+  echo $ai_interpretation;
+
   
   // Setting up a diagnosis entry
   
-  $sql = "INSERT INTO diagnosis (consultation, picture, ai_interpretation) VALUES ('$consultation_id', '$ecg_image', 'You do not have any problems')";
+  $sql = "INSERT INTO diagnosis (consultation, picture, ai_interpretation) VALUES ('$consultation_id', '$ecg_image', '$ai_interpretation')";
   
   if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";

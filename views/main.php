@@ -1,5 +1,5 @@
 <?php 
-require_once('components\navigation.php');
+
 
 
 if (isset($_SESSION['role'])) {
@@ -16,12 +16,28 @@ if (isset($_SESSION['role'])) {
             require_once('patient/patient_upload_image.php'); // Rout to the ecg image upload page
         } elseif (isset($_GET['page']) and $_GET['page'] == "patientProfile") {
             require_once('patient/patient_profile.php'); // Rout to patient profile page
-        } else {
+        } elseif (isset($_GET['page']) and $_GET['page'] == "patientResult") {
+            require_once('patient/patient_result.php'); // Rout to patient result page
+        }else {
             require_once('patient/patient_main.php');
 
         }
     } elseif ($_SESSION['role'] == 'physician') {
-        require_once('doctor/doctor_main.php');
+        if (isset($_GET['page']) and $_GET['page'] == "doctorCodeGeneration") {
+            require_once('doctor/doctor_code_generation.php');
+        } elseif (isset($_GET['page']) and $_GET['page'] == "doctorToDiagnose") {
+            require_once('doctor/doctor_to_diagnose.php'); // Route to doctore diagnose page where all the results are listed at.
+        } elseif (isset($_GET['page']) and $_GET['page'] == "patientResult") {
+            require_once('patient/patient_result.php'); // Route to patient result page
+        } elseif (isset($_GET['page']) and $_GET['page'] == "doctorShareMain") {
+            require_once('doctor/doctor_share_main.php'); // Route to doctor share page
+        } elseif (isset($_GET['page']) and $_GET['page'] == "doctorShareAdd") {
+            require_once('doctor/doctor_share_add.php'); // Route to doctor share page
+        }  else {
+            require_once('doctor/doctor_main.php');
+        }
+
+        
     }
 }
 

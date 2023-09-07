@@ -49,7 +49,11 @@ if (isset($_GET['aiInterpreted']) and $_GET['aiInterpreted'] == 'true') {
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();            
             $ecg_image = $row['picture'];
-            echo $row['ai_interpretation'];
+            if ($row['ai_interpretation'] == 0) { // giving appropriate message based on the AI itnerpretation
+                echo "The results show that your readings are normal but to waint for the doctors interpretation before making any decisions";
+            } else {
+                echo "The system recommonds you to consult the physician at your earliest convinience";
+            } 
             echo "<script>";
             echo "ecg_capture_display.src = 'uploads/$ecg_image' ";  
             echo "</script>";

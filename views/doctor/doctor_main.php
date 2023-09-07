@@ -39,12 +39,12 @@
         margin: 15px auto 0 auto;
     }
 
-    #diagnose_icon {            
+    #generate_code_icon {            
         background-color: var(--yellow);
     }
 
-    #my_profile_icon {
-        background-color: var(--green);
+    #doctor_diagnose_icon {
+        background-color: var(--light-blue);
     }
     
 
@@ -55,8 +55,8 @@
         <img src="resources/pictures/code.png" alt="Image of a stethoscope" class="icon_image">
         <p class="icon_text">DocCode</p>
     </div>
-    <div id="diagnose_icon" class="icon">
-        <img src="resources/pictures/stethoscope.png" alt="Image of a stethoscope" class="icon_image">
+    <div id="doctor_diagnose_icon" class="icon">
+        <img src="resources/pictures/doctor_diagnose.png" alt="Image of a stethoscope" class="icon_image">
         <p class="icon_text">Diagnose</p>
     </div>
     <div id="patient_history_icon" class="icon">
@@ -73,3 +73,16 @@
     </div>
 
 </main>
+
+<script>
+  let generate_code_icon = document.getElementById("generate_code_icon");
+  generate_code_icon.addEventListener("click", function() {
+    window.location = "index.php?page=doctorCodeGeneration";
+  });
+
+  let doctor_diagnose_icon = document.getElementById("doctor_diagnose_icon");
+  doctor_diagnose_icon.addEventListener("click", function() {
+    window.location = "index.php?page=doctorToDiagnose";
+  });
+    
+</script>

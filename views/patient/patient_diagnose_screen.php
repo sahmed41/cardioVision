@@ -67,7 +67,7 @@
     });
 
     upload_icon.addEventListener("click", function(){
-        window.location ="index.php?page=patientUploadImage";
+        window.location = "index.php?page=patientUploadImage";
     });
 </script>
     
