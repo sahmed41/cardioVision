@@ -5,13 +5,13 @@
     }
 
     main {
-        width: 100%;
-        height: 70vh;
         display: flex;
-        row-gap: 15px;
         justify-content: space-evenly;
+        row-gap: 15px;
         flex-wrap: wrap;
-        margin: 100px 0;            
+        width: 90%;
+        height: 70vh;
+        margin: 150px auto;            
 
 
     }
@@ -65,7 +65,7 @@
 <main>
     <div id="generate_code_icon" class="icon">
         <img src="resources/pictures/code.png" alt="Image of a stethoscope" class="icon_image">
-        <p class="icon_text">DocCode</p>
+        <p class="icon_text">Consult</p>
     </div>
     <div id="doctor_diagnose_icon" class="icon">
         <img src="resources/pictures/doctor_diagnose.png" alt="Image of a stethoscope" class="icon_image">
@@ -83,7 +83,6 @@
         <img src="resources/pictures/shared_results.png" alt="Image of a stethoscope" class="icon_image">
         <p class="icon_text">Shared Results</p>
     </div>
-
 </main>
 
 <script>
@@ -97,4 +96,18 @@
     window.location = "index.php?page=doctorToDiagnose";
   });
     
+  let shared_results_icon = document.getElementById("shared_results_icon");
+  shared_results_icon.addEventListener("click", function() {
+    window.location = "index.php?page=doctorSharedResults";
+  });
+
+  let patient_history_icon = document.getElementById("patient_history_icon");
+  patient_history_icon.addEventListener("click", function() {
+    window.location = "index.php?page=doctorPatientHistory";
+  });
+    
+  let view_results_icon = document.getElementById("view_results_icon");
+  view_results_icon.addEventListener("click", function() {
+    window.location = "index.php?page=doctorViewResults";
+  });    
 </script>

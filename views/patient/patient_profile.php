@@ -31,6 +31,10 @@
         border-radius: 5px;
         cursor: pointer;
     }
+    
+    .diagnosis.abnormal_result {
+        border-left: 5px solid var(--orange);
+    }
 
     .diagnosis .diagnosis_date {
         font-size: 0.8em;
@@ -47,6 +51,10 @@
         padding: 2px;
         text-align: center;
     }
+
+    .diagnosis.abnormal_result .link_to_result {
+        background-color: var(--orange);
+    }
     
     .link_to_result a {
         color: var(--white);                
@@ -54,8 +62,12 @@
     }
 
     .new {
-        color: var(--orange);
+        color: var(--green);
         font-size: 1.1em;
+    }
+    
+    .diagnosis.abnormal_result .new {
+        color: var(--orange);
     }
 </style>
 
@@ -81,13 +93,13 @@
 
     <div id="diagnoses">
         <?php 
-        $sql = "SELECT id FROM consultation WHERE patient='$patient_id'";
+        $sql = "SELECT id, date FROM consultation WHERE patient='$patient_id' ORDER BY date DESC"; // Getting the consultation ids for each pation
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-             $sql1 = "SELECT id, consultation, picture, ai_interpretation, physician_interpretation, ai_confirm, date, viewed FROM diagnosis WHERE consultation='" . $row['id'] . "'";
+             $sql1 = "SELECT id, consultation, picture, ai_interpretation, physician_interpretation, ai_confirm, date, viewed FROM diagnosis WHERE consultation='" . $row['id'] . "' ORDER BY date ASC"; // Getting diagnosis informaiton of each patiect for their consultation
              
 
              $result1 = $conn->query($sql1);
@@ -96,9 +108,9 @@
                 while($row1 = $result1->fetch_assoc()) {
                     
         ?>
-        <div class="diagnosis" id="diagnosis">
+        <div class="diagnosis <?php if ($row1['ai_interpretation'] == 0) { echo "normal_result";} else { echo "abnormal_result";} ?>" id="diagnosis"> <!-- Setting up classes for stying differently depend on the AI interpretation -->
             <div id="diagnosis_information">
-                <p class="diagnosis_date"><?php echo "00" . $row1['date'] ?></p>
+                <p class="diagnosis_date"><?php echo $row['date'] ?></p>
                 <p class="diagnosis_id">Diagnosis <?php echo "00" . $row1['id'] ?></p>
                 <p class="link_to_result"><a href="index.php?page=patientResult&diagnoseId=<?php echo $row1['id']; ?>">Open</a></p>
             </div>
@@ -113,8 +125,8 @@
             <script> // This will enable the feature of clicking anywther in the diagnosis to take you to corresponding result. I have uside inside the body not at the end, beause the diagnose id for each result is generted in this loop. 
                               
                 
-                $('.new_indicator').parent().css("border-left","5px solid var(--orange)"); // Giving the orange border to results that are not interpreted yet
-                $('.new_indicator').prev().children(":last-child").css("background-color","var(--orange)"); // Giving the orange border to results that are not interpreted yet
+                // $('.new_indicator').parent().css("border-left","5px solid var(--orange)"); // Giving the orange border to results that are not interpreted yet
+                // $('.new_indicator').prev().children(":last-child").css("background-color","var(--orange)"); // Giving the orange border to results that are not interpreted yet
                 
                 
             </script>
@@ -127,9 +139,7 @@
             echo "0 results";
         }
         ?>
-        <div class="diagnosis">
-
-        </div>
+        
     </div>
     <?php echo $message?>
 </main>

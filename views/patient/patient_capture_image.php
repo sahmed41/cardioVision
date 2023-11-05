@@ -38,6 +38,8 @@
         font-size: 1.2em;
     }
 
+    /* Buttons */
+
     #ecg_capture_form_buttons {
         display: flex;
         flex-direction: row;
@@ -58,23 +60,52 @@
         background-color: var(--green);
         color: var(--white);
     }
+
     
     #ecg_capture_clear_button {
         background-color: var(--orange);
         color: var(--white);
     }
+    
+    #image_upload_button:disabled,
+    #ecg_capture_clear_button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    /* Interpretation Container */
 
-    #ai_interpretation_container {
+    /* #ai_interpretation_container {
         background-color: var(--white);
         width: 90%;
         margin: 10px auto;
         padding: 10px;
         border-radius: 5px;
         cursor: pointer;
-    }
+    } */
 
     #ai_interpretation_container h2 {
         margin: 5px 0;
+    }
+
+    /* Customising the AI interpretaion text */
+    
+    #ecg_interpretation_normal,
+    #ecg_interpretation__abnormal { /* Normal and abnormal result */
+        width: 90%;
+        margin: 10px auto;
+        padding: 10px;
+        border-radius: 5px;        
+    }
+
+    #ecg_interpretation_normal { /* Normal result */
+        background-color: var(--green);
+        color: var(--white);
+        
+    }
+
+    #ecg_interpretation__abnormal { /* Abnormal result */
+        background-color: var(--orange);
+        color: var(--white);
     }
     
 </style>
@@ -82,17 +113,18 @@
 <main>
     
 
-<form action="_engine\ecg_image_processing.php" method="post" enctype="multipart/form-data">
+<form action="_engine\ecg_image_processing.php" method="post" enctype="multipart/form-data" id="image_capture_upload_form">
     <label for="ecg_capture" id="ecg_capture_label">
         <div id="ecg_capture_container" for="ecg_capture">
-            <img src="resources/pictures/upload.png" alt="" id="ecg_capture_display">
-            <p id="ecg_capture_text">upload Image</p>
+            <img src="resources/pictures/camera.png" alt="" id="ecg_capture_display">
+            <p id="ecg_capture_text">Capture Image</p>
         </div>
     </label>
-    <input type="file" id="ecg_capture" name="ecg_capture" accept="image/*" capture >
+    <input type="file" id="ecg_capture" name="ecg_capture" accept="image/*">
+    <input type="hidden" name="input_type" value="capture">
     <div id="ecg_capture_form_buttons">
-        <input type="submit" value="Interpret" id="image_upload_button">
-        <button id="ecg_capture_clear_button">Clear ECG</button>
+        <input type="submit" value="Interpret" id="image_upload_button" <?php if (isset($_GET['aiInterpreted']) and $_GET['aiInterpreted'] == 'true') {echo "disabled";}?>>
+        <button id="ecg_capture_clear_button" <?php if (isset($_GET['aiInterpreted']) and $_GET['aiInterpreted'] == 'true') {echo "disabled";}?>>Clear ECG</button>
     </div>
 </form>
 
@@ -115,16 +147,18 @@ if (isset($_GET['aiInterpreted']) and $_GET['aiInterpreted'] == 'true') {
         if ($result->num_rows == 1) {
             $row = $result->fetch_assoc();            
             $ecg_image = $row['picture'];
-            echo "<div id='ai_interpretation_container'>"; // A container to display system interpretaion
-            echo "<h2>System Interpretation</h2>"; // System Interpretation heading
             if ($row['ai_interpretation'] == 0) { // giving appropriate message based on the AI itnerpretation
-                echo "<p id='ecg_interpretation'>The results show that your readings are normal but to waint for the doctors interpretation before making any decisions</p>";
+                echo "<div id='ecg_interpretation_normal'>"; // A container to display system interpretaion
+                echo "<h2>System Interpretation</h2>"; // System Interpretation heading
+                echo "<p>Your results are sent to the doctor who prescribed you the test. Please await the physician's interpretation before making any decisions.</p>";
             } else {
-                echo "<p id='ecg_interpretation'>The system recommonds you to consult the physician at your earliest convinience</p>";
-            } 
+                echo "<div id='ecg_interpretation__abnormal'>"; // A container to display system interpretaion
+                echo "<h2>System Interpretation</h2>"; // System Interpretation heading
+                echo "<p>Your results are sent to the doctor who prescribed you the test. Please contact your physician and get the interpretation of your ECG as soon as possible or book an appointment with the physician at your earliest convinience.</p>";
+            }
             echo "</div>";
             echo "<script>";
-            echo "ecg_capture_display.src = 'uploads/$ecg_image' ";  
+            echo "ecg_capture_display.src = 'uploads/$ecg_image' ";  // Showing the ECG image even after interpretation
             echo "</script>";
         } else {
             echo "0 Results";
@@ -142,7 +176,7 @@ if (isset($_GET['aiInterpreted']) and $_GET['aiInterpreted'] == 'true') {
 
 
 <script>
-    let ecg_capture =document.getElementById('ecg_capture');
+    let ecg_capture = document.getElementById('ecg_capture');
     let ecg_capture_display =document.getElementById('ecg_capture_display');
     ecg_capture.addEventListener("change", function(ev) {
         console.log(ecg_capture.files[0]);
@@ -153,8 +187,25 @@ if (isset($_GET['aiInterpreted']) and $_GET['aiInterpreted'] == 'true') {
 
     // Setting up the buttton to clear ecg
     $("#ecg_capture_clear_button").click(function(event) {
-        event.preventDefault();
+        event.preventDefault(); // Preventing the form from submitting once the clear button is clicked
+        ecg_capture.value = ''; // Clearing the ECG image input
+        ecg_capture.dispatchEvent(new Event("change")); // Making the change event occur once the clear button is clicked to deactivate the interpret button 
         ecg_capture_display.src = "resources/pictures/upload.png";
     });
+
+    // Preventing the interpret button being clicked when there is no ECG is being uploaded
+    if (!ecg_capture.files.length > 0) {
+        document.getElementById("image_upload_button").disabled = true;
+    }
+    
+    ecg_capture.addEventListener('change', function() { 
+        if (ecg_capture.files.length > 0) { // When ECG is uploaded the interpret button becomes active    
+            document.getElementById("image_upload_button").disabled = false;
+        } else { // When ECG is cleared  the interpret button becomes deactive 
+            document.getElementById("image_upload_button").disabled = true;
+        }
+    });
+
+
 </script>
 

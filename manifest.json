@@ -1,0 +1,17 @@
+{
+    "name": "CardioVision", 
+    "short_name": "CardioVision", 
+    "start_url": ".", 
+    "background_color": "#f37336",
+    "theme_color": "#5ABA4A",
+    "display": "standalone",
+    "prefer_related_applications": true,
+    "icons": [
+        {
+            "src": "resources/pictures/heart_rate.png" ,
+            "sizes": "512x512", 
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

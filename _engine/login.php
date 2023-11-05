@@ -1,5 +1,3 @@
-<h1>Hello</h1>
-
 <?php
 require_once('db_connection.php');
 
@@ -32,7 +30,7 @@ if ($result->num_rows == 1) {
 
   header("Location: ../index.php"); 
 } else {
-  echo "0 results";
+  header("Location: ../index.php?message=wrong_credentials"); 
 }
 
 // echo $_SESSION['f_name']; // Testing

@@ -5,45 +5,42 @@
     }
 
     .diagnosis {
-        background-color: var(--white);
-        width: 90%;
-        margin: 10px auto;
-        border-radius: 5px;
-        padding: 10px;        
-        border-left: 5px solid var(--orange);
-        cursor: pointer;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
-
-    .diagnosis .diagnosis_date {
-        font-size: 0.8em;
-    
-    }
-
-    .diagnosis .diagnosis_id {
-        font-size: 1.2em;
-    }
-
+    /* Open button */
     .link_to_result {
-        background-color: var(--orange);
-        width: 20%;
+        width: 40%;
         margin: 5px 0;
         padding: 2px;
         text-align: center;
     }
-    
-    .link_to_result a {
-        color: var(--white);                
-        text-decoration: none;
+
+    /* New Batch sytyle */
+    .new {
+        width: 10%;
+        color: var(--green);
+        font-size: 1.1em;
     }
+    
+    .diagnosis.abnormal .new {
+        color: var(--orange);
+    }
+
+
+    
+    
 
 </style>
 <main>
     <h1 class="page_heading">To Interpret</h1>
+    <p class="screen_instruction">The following reports are yet to be interpreted by you. The reports the system concidereds abnormal are colour coded in orange and the reports the system concidereds normal are colour coded in green.</p>
 <?php 
 $physician_id = $_SESSION['id'];
 $message = "You have no diagnosis to perform";
 
-$sql = "SELECT id FROM consultation WHERE physician='$physician_id'";
+$sql = "SELECT id, date FROM consultation WHERE physician='$physician_id'  ORDER BY date DESC";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -58,14 +55,18 @@ if ($result->num_rows > 0) {
         while($row1 = $result1->fetch_assoc()) {
             
 ?>
-<div class="diagnosis">
-    <p class="diagnosis_date"><?php echo "00" . $row1['date'] ?></p>
-    <p class="diagnosis_id">Diagnosis <?php echo "00" . $row1['id'] ?></p>
-    <p class="link_to_result"><a href="index.php?page=patientResult&diagnoseId=<?php echo $row1['id']; ?>">Open</a></p>
-    
-
+<div class="diagnosis <?php if ($row1['ai_interpretation'] == 0) { echo 'normal'; } else { echo 'abnormal'; } // Adding appropriate classes for normal and abnoral AI interpretations?>"> 
+    <div id="diagnosis_information">
+        <p class="diagnosis_date"><?php echo $row['date'] ?></p>
+        <p class="diagnosis_id">Diagnosis <?php echo "00" . $row1['id'] ?></p>
+        <p class="link_to_result"><a href="index.php?page=patientResult&diagnoseId=<?php echo $row1['id']; ?>">Open</a></p>
+    </div>
+    <?php 
+    if($row1['physician_interpretation'] == null) { 
+        echo '<div class="new_indicator"><p class="new">New</p></div>';
+    }
+?> 
 </div>
-
 <?php
 
             

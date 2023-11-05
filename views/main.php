@@ -33,6 +33,16 @@ if (isset($_SESSION['role'])) {
             require_once('doctor/doctor_share_main.php'); // Route to doctor share page
         } elseif (isset($_GET['page']) and $_GET['page'] == "doctorShareAdd") {
             require_once('doctor/doctor_share_add.php'); // Route to doctor share page
+        } elseif (isset($_GET['page']) and $_GET['page'] == "doctorSharedResults") {
+            require_once('doctor/doctor_shared_results.php'); // Route to doctor shared results page
+        } elseif (isset($_GET['page']) and $_GET['page'] == "doctorSharedResult") {
+            require_once('doctor/doctor_shared_result.php'); // Route to individual shared result
+        } elseif (isset($_GET['page']) and $_GET['page'] == "doctorPatientHistory") {
+            require_once('doctor/doctor_patient_history.php'); // Route to individual shared result
+        } elseif (isset($_GET['page']) and $_GET['page'] == "doctorViewResults") {
+            require_once('doctor/doctor_view_results.php'); // Route to individual shared result
+        } elseif (isset($_GET['page']) and $_GET['page'] == "doctorPatientReports") {
+            require_once('doctor/doctor_patient_reports.php'); // Route to patint history from diagnosis
         }  else {
             require_once('doctor/doctor_main.php');
         }
@@ -47,7 +57,8 @@ if (isset($_SESSION['role'])) {
 
 
 
-// echo $_GET['user']; // testing
+
 ?>
+
     
     

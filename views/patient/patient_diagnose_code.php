@@ -31,6 +31,15 @@
         color: var(--white);
     }
 
+    /* Error Message styling */
+    #docCode_verification {
+    width: 90%;
+    margin: auto;
+    height: 100px;
+    font-size: 1.2em;
+    color: var(--orange);
+    }
+
 </style>
 
 <main>
@@ -38,4 +47,15 @@
         <input type="text" name="doc_code" id="doc_code">
         <input type="submit" value="Enter" id="doc_code_submit_button">
     </form>
+    <div id="docCode_verification">
+        <p>
+        <?php 
+        if (isset($_GET['message']) and $_GET['message'] == "invalid_docCode") {
+            echo "You have provided an incorrect docCode!";
+        } else if (isset($_GET['message']) and $_GET['message'] == "used_docCode") {
+            echo "The docCode is already used!";
+        }
+        ?>
+        </p>
+    </div>
 </main>

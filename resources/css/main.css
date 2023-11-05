@@ -3,6 +3,7 @@
 :root {
     --bg_primary: #e6e1e1;
     --white: #fff;
+    --dark: #000;
     --dark-blue: #10217d;
     --light-blue: #63c8f2;
     --yellow: #f7cc38;
@@ -66,6 +67,17 @@ input[type="submit"] {
     text-decoration: none;
 }
 
+#user_info {
+    position: absolute;
+    width: 90%;
+    padding: 5px;
+    border-radius: 5px;
+    top: 80px;
+    left: 5%;
+    font-size: 1.1em;
+    background-color: var(--dark);
+    color: var(--white);
+}
 
 /* Icons */
 

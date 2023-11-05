@@ -22,7 +22,7 @@ if ($result->num_rows == 1) {
   }
 } else {
   echo "No such docCode exists <br>";
-  echo '<a href="../index.php">Go back</a>';
+  // echo '<a href="../index.php">Go back</a>';
 }
 
 
@@ -129,7 +129,19 @@ if (!$doc_code_used) {
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
-  header("Location: ../index.php?page=patientCaptureImage&aiInterpreted=true"); 
+
+  echo $_POST['input_type'];
+
+  // Notification expirementation
+  
+
+
+
+  if (isset($_POST['input_type']) and $_POST['input_type'] == "capture") {
+    header("Location: ../index.php?page=patientCaptureImage&aiInterpreted=true"); 
+  } else {
+    header("Location: ../index.php?page=patientUploadImage&aiInterpreted=true"); 
+  }
 
 } else {
   echo "The doc code is alread used.";  

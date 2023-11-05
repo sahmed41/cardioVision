@@ -12,17 +12,122 @@ body {
 }
 
 main {
-    margin-top: 100px;
+    width: 90%;
+    margin: 100px auto 0 auto;
+    margin-top: 150px;
+    padding-bottom: 50px;
+}
+
+.screen_instruction {
+    width: 90%;
+    margin: 20px auto;
+    font-size: 1.2em;
 }
 
 
+/* ******************************************************* */
+/* Styles for List of diagnosis and List of Shard Results  */
+/* ****************************************************** */
+/*in pages such as patient profile and diagnosis */
 
-#login_main {
+.diagnosis {
+    background-color: var(--white);
+    width: 90%;
+    margin: 10px auto;
+    border-radius: 5px;
+    padding: 10px;        
+    border-left: 5px solid var(--orange);
+}
+
+.diagnosis.normal { /* setting up left border for normale AI interpret results*/
+    border-left: 5px solid var(--green);
+}
+
+
+.diagnosis .diagnosis_date,
+.diagnosis .second_opinion_date {
+    font-size: 0.8em;
+
+}
+
+.diagnosis .diagnosis_id {
+    font-size: 1.2em;
+}
+
+.link_to_result {
+    background-color: var(--orange);
+    width: 20%;
+    margin: 5px 0;
+    padding: 2px;
+    text-align: center;
+}
+
+
+.link_to_result a {
+    color: var(--white);                
+    text-decoration: none;
+}
+
+.diagnosis.normal .link_to_result { /* setting up button for normale AI interpret results*/
+    background-color: var(--green);
+}
+
+.new {
+    color: var(--green);
+    font-size: 1.1em;
+}
+
+.diagnosis.abnormal_result .new {
+    color: var(--orange);
+}
+
+/* ************************************** */
+
+
+/* ***************** */
+/* Individual Reuslt */
+/* ***************** */
+
+
+/* Customising the AI interpretaion text */
+
+#ai_interpretation_container h2 {
+    margin: 5px 0;
+}
+
+#ecg_interpretation_normal,
+#ecg_interpretation__abnormal { /* Normal and abnormal result */
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 5px;        
+}
+
+#ecg_interpretation_normal { /* Normal result */
+    background-color: var(--green);
+    color: var(--white);
+    
+}
+
+#ecg_interpretation__abnormal { /* Abnormal result */
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+/* ***************** */
+/* ********** */
+/* Login Page */
+/* ********** */
+
+/* #login_main {
     width: 100%;
+    margin: 0 0 0 0;
+    min-height: 100vh;
 }
 
 #hero_image {
     width: 100%;
+    margin: 50px 0 50px 0;
 }
 
 #login_form input {
@@ -43,9 +148,9 @@ main {
 }
 
 #login_form input[type="submit"] {
-    background-color: var(--green);
+    background-color: var(--green); */
     /* outline: none; */
-    font-size: 1.2em;
+    /* font-size: 1.2em;
     color: var(--white);
 } 
 
@@ -54,3 +159,10 @@ main {
     width: 90%;
     margin: auto;
 }
+
+#login_message {
+    width: 90%;
+    margin: auto;
+    height: 100px;
+    color: var(--orange);
+} */
